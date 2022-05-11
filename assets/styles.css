@@ -1,0 +1,8 @@
+body{
+    margin-top: 2%;
+}
+.logo{
+    background: no-repeat center/80% url("../public/images/logo.png");
+    height:100px;
+    width:20%;
+}
