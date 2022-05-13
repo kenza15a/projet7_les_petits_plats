@@ -1,8 +1,72 @@
 body{
     margin-top: 2%;
+    margin-left: 20px;
 }
 .logo{
     background: no-repeat center/80% url("../public/images/logo.png");
-    height:100px;
+    height:120px;
     width:20%;
+    object-fit: cover;
+
+}
+header{
+    margin-top: 15px;
+}
+
+.tag{
+    margin-top: 15px;
+
+    font-size: 20px;
+}
+.tags-section{
+    padding: 2%;
+    margin-left:5%;
+    width:92%
+}
+
+.btn-close{
+    opacity: 0.8;
+    padding: 10px;
+    margin-left: 15px;
+    font-size: 15px;
+
+}
+
+.recipe{
+margin-left: 2%;
+background-color: #E7E7E7;
+font-family: 'Dongle', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Shrikhand', 'cursive';
+}
+.cards{
+    padding: 1%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.recipe-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.recipe-content>p{
+    text-align: left;
+    padding: 2%;
+/*margin-left: 20px;*/
+}
+
+/*search*/
+.input-group{
+width:92%;
+padding: 2%;
+height: 50px;
+}
+.fa-search{
+    font-size: 35px;
+    padding: 10px;
+    font-size: 30px;
+}
+.search-field{
+    background-color:#E7E7E7 ;
+    padding: 15;
 }
