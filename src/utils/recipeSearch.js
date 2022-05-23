@@ -25,8 +25,11 @@ export default class recipeSearch {
             else{
 
                 //insere une errerur sous le champs
-                alert("vous devez inserer plus de 3 caracteres")
-            }
+                /*let searchField = document.getElementById('search-input');
+                searchField.style.border="solid red";
+                document.querySelector(".search-error").innerText="vous devez saisir plus de 3 caratères"*/
+                
+                        }
         }
         return recipeResult;
 

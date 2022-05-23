@@ -18,7 +18,7 @@ export default class index {
         let searchField = document.getElementById('search-input');
         const recipiesSection = document.querySelector('.cards');
         let keyWords = "";
-        searchButton.addEventListener('click', () => {
+        searchField.addEventListener('input', () => {
 
             keyWords = searchField.value;
             console.log(keyWords);
@@ -80,11 +80,6 @@ export default class index {
     }
 
 
-    /*display filters ingredients*/
-    diplayIngredients() {
-        //appel la factory des igredients
-
-    }
 
     renderPage() {
         let tabResults = this.getResults();

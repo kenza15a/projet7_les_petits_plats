@@ -18,6 +18,7 @@ export default class recipeCardFactory {
             ingredientsList.appendChild(ingredientF.getIngredientsLi());
 
         }
+
         return ingredientsList.innerHTML;
 
     }
@@ -26,17 +27,17 @@ export default class recipeCardFactory {
 
         const { id, name, ingredients, time, description, appliance, ustensils } = this._data;///--->nouveau;
         const card = document.createElement('div');
-        card.classList.add('card', 'recipe');
+        card.classList.add('card', 'col-lg-3','recipe','col-xs-12');
         card.innerHTML = `
-      <div class="gray-background">
+      <div class="card-image-div">
       <img class="card-image" src="./images/cardimage.png" alt="${name}">
-        </div>
+      </div>
       <div class="card-body">
         <h5 class="d-flex flex-row bd-highlight mb-2 justify-content-between card-title ">${name} 
         <div class="time"><i class="fa fa-clock"></i>${time} <span><strong> min</strong><span></div></h5>
         <div class="recipe-content">
           <div class="card-text ingredients">
-            ${this.getIngredients(ingredients)}
+           <ul class="ingredients-list"> ${this.getIngredients(ingredients)}</ul>
           </div>
           <p class="card-text description">${description}</p>
         </div>
