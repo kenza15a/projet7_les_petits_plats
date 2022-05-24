@@ -89,28 +89,21 @@ height: 50px;
     cursor: pointer;
     border-radius: 5%;
     min-width: 120px;
+    width:200px;
   }
   #Appareils{
   background-color:#20c997;
-
-  
-
   }
-
-  /*#dc3545
-*/
 #ustensils{
     background-color:#dc3545;
-
-  
     }
-  
-  
+
   /* The search field */
-  #myInput {
+  #Ingredients_search,#Appareils_options,#Ustensils_options {
     box-sizing: border-box;
-    background-image: url('searchicon.png');
-    background-position: 14px 12px;
+    background-image: url('../public/images/searchicon.png');
+    background-position: 10px 15px;
+    background-size:18px;
     background-repeat: no-repeat;
     font-size: 16px;
     padding: 14px 20px 12px 45px;
@@ -130,15 +123,25 @@ height: 50px;
   
   /* Dropdown Content (Hidden by Default) */
   .dropdown-content {
+      /*invisible par defaut*/
     display: none;
     position: absolute;
-    background-color: #f6f6f6;
-    min-width: 120px;
-    border: 1px solid #ddd;
-    z-index: 1;
+    background-color: #0d6efd;
+    min-width: min-200;
+    border:none;
+    border-radius: 1%;
+    z-index: 100;
+    color: white;
   }
-  .dropdown-content{
-      background-color: #0d6efd;;
+  /*appreils content*/
+  #appliancesDropdown{
+    background-color:#20c997;
+
+  }
+  /*ustensils content*/
+  #ustensilsDropdown{
+      background-color: #dc3545;
+
   }
   
   /* Links inside the dropdown */
@@ -203,7 +206,7 @@ height: 50px;
 
 /*gerer le l'errerur de nombre de caractere
 .search-error{
-    margin-top: 50px;
+    margin-top: 50pingredientDropdownx;
     margin-left: 50px;
 }
 .search-error>p{

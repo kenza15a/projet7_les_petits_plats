@@ -7,7 +7,7 @@ export default class index {
         this.recipies = recipes;
     }
 
-    
+
     getListOfIngredients(tabRecipe) {
         let recipeResult = [];
         for (let i = 0; i < tabRecipe.length; i++) {
@@ -70,10 +70,14 @@ export default class index {
         for (let i = 0; i < keyWordsArray.length; i++) {
             if (keyWordsArray[i].length >= 3) {
                 this.recipies.forEach(recipe => {
-                    if (recipe.name.toLowerCase().includes(keyWordsArray[i].toLowerCase()) || (recipe.description.toLowerCase().includes(keyWordsArray[i].toLowerCase())))
+                    let currentIngredients = [];
+                    if (recipe.name.toLowerCase().includes(keyWordsArray[i].toLowerCase()) || (recipe.description.toLowerCase().includes(keyWordsArray[i].toLowerCase()))||this.searchInIngredients(keyWordsArray[i],recipe.ingredients))
                         recipeResult.push(recipe);
-     
+
                 });
+
+                /*search in ingredients*/
+
 
             }
         }
@@ -82,6 +86,35 @@ export default class index {
         return recipeResult;
 
     }
+
+
+    /*rechrcher dans les ingredients*/
+    searchInIngredients(keyWord,ingredientsTab) {
+        let exist=false;
+        ingredientsTab.forEach(ingredient=>{
+        if(ingredient.ingredient.toLowerCase().includes(keyWord.toLowerCase())){
+            exist=true;
+        }
+
+        });
+        return exist;
+
+
+    }
+       /* let tabRecipe = this.recipes;
+        let keyWordsArray = keyWords.split(' ');
+        let ingredientTab = [];
+        recipe.ingredients.forEach(ingredient=>
+                   {  
+                        if (ingredient.toLowerCase().includes(keyWordsArray[i].toLowerCase())) {
+                            recipeResult.push(ingredientTab);
+                        }
+                    });
+          
+
+        return recipeResult;
+
+    }*/
     getResults() {
         var tabResults = [];
         /*recupereer le bouton search*/
@@ -89,7 +122,7 @@ export default class index {
         let searchField = document.getElementById('search-input');
         const recipiesSection = document.querySelector('.cards');
         let keyWords = "";
-        console.log("the keywords"+keyWords);
+        console.log("the keywords" + keyWords);
         searchField.addEventListener('input', () => {
 
             keyWords = searchField.value;
@@ -101,7 +134,7 @@ export default class index {
                 this.displayRecipies(tabResults);
             }
             else {
-                recipiesSection.innerHTML = `<p class="not-found"s>« Aucune recette ne correspond à votre critère… <span class="keyword">${keyWords}!</span> </br>vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
+                recipiesSection.innerHTML = `<p class="not-found">« Aucune recette ne correspond à votre critère… <span class="keyword">${keyWords}!</span> </br>vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
             }
             //console.log('Resultats de recherche par titre description et ingrédients pour:' + keyWords);
             //console.log(tabResults);
@@ -148,8 +181,22 @@ export default class index {
 
 
     renderPage() {
-       // alert("new index");
+        // alert("new index");
         let tabResults = this.getResults();
+        let titres = this.recipies.map(recipie => recipie.name);
+        let ingredientsArray = this.recipies.map(recipie => recipie.ingredients);
+        console.log(titres);
+        //on veut recuperer les ingredients selon le mot clé 
+        let searched = "coco";
+       let titlesResult=titres.filter(titre=> titre.toLowerCase().includes(searched.toLowerCase()));
+       console.log("les bons titres");
+       console.log(titlesResult);
+
+
+        //sort titles
+        /*
+        console.log ('sorted by name');
+        console.log(titres);*/
 
     }
 

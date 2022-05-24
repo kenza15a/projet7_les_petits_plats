@@ -22,14 +22,14 @@ export default class recipeSearch {
                     }
                 }
             }
-            else{
+            else {
 
                 //insere une errerur sous le champs
                 /*let searchField = document.getElementById('search-input');
                 searchField.style.border="solid red";
                 document.querySelector(".search-error").innerText="vous devez saisir plus de 3 caratères"*/
-                
-                        }
+
+            }
         }
         return recipeResult;
 
@@ -77,12 +77,29 @@ export default class recipeSearch {
         return recipeResult;
 
     }
+    // Vérifier qu'un élément existe déjà dans un tableau
+    elementInTab(elt, tab) {
+        let result = false;
+        if (tab.length != 0) {
+            for (let i = 0; i <= tab.length; i++) {
+                if (tab[i] == elt) {
+                    result = true;
+                    break;
+                }
+            }
+        }
+        return result;
 
+    }
+
+    /*lister les filtres selon le mot clé rechrché*/
     getListOfIngredients(tabRecipe) {
         let recipeResult = [];
         for (let i = 0; i < tabRecipe.length; i++) {
             for (let j = 0; j < tabRecipe[i].ingredients.length; j++) {
-                recipeResult.push(tabRecipe[i].ingredients[j].ingredient);
+                if (!this.elementInTab(tabRecipe[i].ingredients[j].ingredient.toLowerCase(), recipeResult)) {
+                    recipeResult.push(tabRecipe[i].ingredients[j].ingredient);
+                }
             }
         }
 
@@ -102,36 +119,49 @@ export default class recipeSearch {
         let recipeResult = [];
         for (let i = 0; i < tabRecipe.length; i++) {
             for (let j = 0; j < tabRecipe[i].ustensils.length; j++) {
-                recipeResult.push(tabRecipe[i].ustensils[j]);
-            }
-        }
-
-        for (let i = 0; i < recipeResult.length; i++) {
-            for (let j = i + 1; j < recipeResult.length; j++) {
-                if (recipeResult[i] == recipeResult[j]) {
-                    recipeResult.splice(j, 1);
+                // On vérifie que l'élément n'est pas dans le tableau et s'il ne l'aest pas on le push
+                if (!this.elementInTab(tabRecipe[i].ustensils[j].toLowerCase(), recipeResult)) {
+                    recipeResult.push(tabRecipe[i].ustensils[j].toLowerCase());
                 }
+
             }
         }
-
+        /*
+                for (let i = 0; i < recipeResult.length; i++) {
+                    for (let j = i + 1; j < recipeResult.length; j++) {
+                        if (recipeResult[i] == recipeResult[j]) {
+                            recipeResult.splice(j, 1);
+                        }
+                    }
+                }
+        */
 
         return recipeResult;
     }
+
+
+
+
+
     getListOfAppliance(tabRecipe) {
         let recipeResult = [];
         for (let i = 0; i < tabRecipe.length; i++) {
-            recipeResult.push(tabRecipe[i].appliance);
-        }
-
-        for (let i = 0; i < recipeResult.length; i++) {
-            for (let j = i + 1; j < recipeResult.length; j++) {
-                if (recipeResult[i] == recipeResult[j]) {
-                    recipeResult.splice(j, 1);
-                }
+            // On vérifie que l'élément n'est pas dans le tableau et s'il ne l'aest pas on le push
+            if (!this.elementInTab(tabRecipe[i].appliance, recipeResult)) {
+                recipeResult.push(tabRecipe[i].appliance);
             }
         }
-
-
+        /*
+                for (let i = 0; i < recipeResult.length; i++) {
+                    for (let j = i + 1; j < recipeResult.length; j++) {
+                        if (recipeResult[i] == recipeResult[j]) {
+                            recipeResult.splice(j, 1);
+                        }
+                    }
+                }*/
+        /* if (recipeResult[recipeResult.length - 2] == recipeResult[recipeResult.length - 1]) {
+             recipeResult.splice(recipeResult.length - 1, 1);
+         }*/
         return recipeResult;
     }
     // A revérifier si on ne loupe des éléments 
@@ -161,36 +191,60 @@ export default class recipeSearch {
 
 
     }
-}
-    /*
-concatener(tab1, tab2) {
-let resultat = [];
-let temptab = tab1;
- 
-let testvar = false;
-for (let j = 0; j < temptab.length; j++) {
-    if (tab1[i].id == temptab[j].id) {
-        testvar = true;
-    }
-}
-if(!testvar){
-    resultat.push(tab1[i]);
-}
- 
-}           
 
-for (let i = 0; i < tab2.length; i++) {
-let testvar = false;
-for (let j = 0; j < tab1.length; j++) {
-    if (tab2[i].id == tab1[j].id) {
-        testvar = true;
+    /*filtrer  par tags*/
+    /**
+     * 
+     * @param {Array  <recipies>} recipieTab 
+     * @param {String} applianceTag 
+     */
+    searchByAppliance(recipieTab, applianceTag) {
+        let filteredTab = [];
+        for (let i = 0; i < recipieTab.length; i++) {
+            if (recipieTab[i].appliance.toLowerCase() == applianceTag.toLowerCase()) {
+                filteredTab.push(recipieTab[i]);
+            }
+
+        }
+        return filteredTab;
+
+
     }
-}
-if(!testvar){
-    resultat.push(tab2[i]);
-}
-}
-return resultat;
+    searchByUstensils(recipieTab, ustensilTag) {
+        let filteredTab = [];
+        for (let i = 0; i < recipieTab.length; i++) {
+            for (let j = 0; j < recipieTab[i].ustensils.length; j++) {
+                if (recipieTab[i].ustensils[j].toLowerCase() == ustensilTag.toLowerCase()) {
+                    filteredTab.push(recipieTab[i]);
+                }
+
+            }
+        }
+        return filteredTab;
+
+
+
+
+    }
+    searchByIngredients(recipieTab, ingredientTag) {
+        let filteredTab = [];
+        for (let i = 0; i < recipieTab.length; i++) {
+            for (let j = 0; j < recipieTab[i].ingredients.length; j++) {
+                if (recipieTab[i].ingredients[j].ingredient.toLowerCase() == ingredientTag.toLowerCase()) {
+                    filteredTab.push(recipieTab[i]);
+                }
+
+            }
+        }
+        return filteredTab;
+
+
+
+
+    }
+
+
+
 
 }
-*/
+
