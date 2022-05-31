@@ -11,7 +11,11 @@ export default class recipeSearch {
      * 
      * @param {un ou plusieurs mots} keyWords 
      */
-    searchInName(keyWords, tabRecipe) {
+   searchInName(keyWords, tabRecipe) {
+
+        //teste de performance
+        console.log("temps d'execution searchbyname basic")
+        console.time('for');
         let keyWordsArray = keyWords.split(' ');
         let recipeResult = [];
         for (let i = 0; i < keyWordsArray.length; i++) {
@@ -22,19 +26,13 @@ export default class recipeSearch {
                     }
                 }
             }
-            else {
-
-                //insere une errerur sous le champs
-                /*let searchField = document.getElementById('search-input');
-                searchField.style.border="solid red";
-                document.querySelector(".search-error").innerText="vous devez saisir plus de 3 caratères"*/
-
-            }
+          
         }
+        console.timeEnd('for')
         return recipeResult;
 
     }
-
+    
     searchInDescription(keyWords, tabRecipe) {
         tabRecipe = this.recipes;
         let keyWordsArray = keyWords.split(' ');
@@ -237,9 +235,6 @@ export default class recipeSearch {
             }
         }
         return filteredTab;
-
-
-
 
     }
 

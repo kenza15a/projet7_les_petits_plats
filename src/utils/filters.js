@@ -22,11 +22,11 @@ filterButtonUst.addEventListener("click",()=>{
   
 });
 
-ingredientSearch.addEventListener("keyup",filterIngredients);
-appareilsSearch.addEventListener("keyup",filterAppareils);
+ingredientSearch.addEventListener("keyup",filterIngredients());
+appareilsSearch.addEventListener("keyup",filterAppareils());
 
 function filterIngredients(){
-  var input, filter, ul, li, a, i;
+  var input, filter,a, i;
   input = document.getElementById("Ingredients_search");
   filter = input.value.toUpperCase();
   div = document.getElementById("ingredientDropdown");
@@ -42,7 +42,7 @@ function filterIngredients(){
 }
 
 function filterAppareils(){
-  var input, filter, ul, li, a, i;
+  var input, filter, a, i;
   input = document.getElementById("Appareils_options");
   filter = input.value.toUpperCase();
   div = document.getElementById("appliancesDropdown");
