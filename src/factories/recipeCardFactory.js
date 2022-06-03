@@ -27,7 +27,7 @@ export default class recipeCardFactory {
 
         const { id, name, ingredients, time, description, appliance, ustensils } = this._data;///--->nouveau;
         const card = document.createElement('div');
-        card.classList.add('card', 'col-lg-3','recipe','col-xs-12');
+        card.classList.add('card', 'col-lg-3','col-md-9','recipe','col-xs-12');
         card.innerHTML = `
       <div class="card-image-div">
       <img class="card-image" src="./images/cardimage.png" alt="${name}">

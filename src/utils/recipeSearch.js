@@ -11,7 +11,7 @@ export default class recipeSearch {
      * 
      * @param {un ou plusieurs mots} keyWords 
      */
-   searchInName(keyWords, tabRecipe) {
+    searchInName(keyWords, tabRecipe) {
 
         //teste de performance
         console.log("temps d'execution searchbyname basic")
@@ -26,13 +26,13 @@ export default class recipeSearch {
                     }
                 }
             }
-          
+
         }
         console.timeEnd('for')
         return recipeResult;
 
     }
-    
+
     searchInDescription(keyWords, tabRecipe) {
         tabRecipe = this.recipes;
         let keyWordsArray = keyWords.split(' ');
@@ -234,6 +234,11 @@ export default class recipeSearch {
 
             }
         }
+        //sorter et spprimer les doublants
+        /*const byValue = (a, b) => a - b;
+        filteredTab = filteredTab.sort(byValue);
+        console.log("apres sort" + filteredTab);*/
+        
         return filteredTab;
 
     }

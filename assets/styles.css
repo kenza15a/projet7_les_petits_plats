@@ -45,7 +45,7 @@ header {
     border-radius:2%;
     border: none;
    
-    height:420px;
+    height:400px;
 }
 
 .cards {
@@ -60,13 +60,13 @@ header {
     flex-direction: row;
     justify-content: space-between;
     height: 80%;
+  
 }
 
 .recipe-content>p {
     text-align: left;
-    padding: 1%;
     font-size: 12px;
-    display: -webkit-box;
+    display:-webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -105,14 +105,18 @@ header {
     border-radius: 5%;
     min-width: 120px;
     width: 200px;
+    font-weight: 600;
+    font-size: 20px;
 }
 
 #Appareils {
     background-color: #20c997;
+   
 }
 
 #ustensils {
     background-color: #dc3545;
+    
 }
 
 /* The search field */
@@ -179,18 +183,19 @@ header {
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-    background-color: #f1f1f1
+    background-color: #ada7a7
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
     display: block;
+    
 }
 
 
 /*card images*/
 .card-image-div {
-    height: 50%;
+    height: 40%;
 
 }
 
@@ -252,18 +257,12 @@ header {
 .tag-button {
     margin-right: 10px;
 }
-
-
-
-
 .card-body {
     height: 60%;
 }
-
 .fa-regular,
 .fa-circle-xmark {
     margin-left: 10px;
-
 }
 
 .ingrediant-tag {
@@ -299,4 +298,18 @@ header {
     color:#dc3545;
     border: solid 0.2px  #dc3545;
 
+}
+/*.delete-tag{
+
+    display: none;
+}*/
+.dropdown-toggle::after {
+    display:none;
+}
+.fa-chevron-down{
+    margin-left: 25px;
+}
+.arrow_up{
+    
+    content:'\f077'; 
 }

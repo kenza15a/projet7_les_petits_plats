@@ -286,6 +286,7 @@ export default class index {
         }
     }
     deleteTag(tag) {
+        tag.classList.add("delete")
 
 
     }
