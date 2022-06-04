@@ -1,4 +1,4 @@
-import recipes from "../../data/recipes.js"
+import recipes from '../../data/recipes.js'
 export default class recipeSearch {
     constructor() {
         this.recipes = recipes;
@@ -14,7 +14,7 @@ export default class recipeSearch {
     searchInName(keyWords, tabRecipe) {
 
         //teste de performance
-        console.log("temps d'execution searchbyname basic")
+        console.log('temps d\'execution searchbyname basic')
         console.time('for');
         let keyWordsArray = keyWords.split(' ');
         let recipeResult = [];

@@ -1,6 +1,6 @@
 /*une page piur gerer le js de la page accueil*/
-import recipeSearch from "../utils/recipeSearch.js";
-import recipeCardFactory from "../factories/recipeCardFactory.js";
+import recipeSearch from '../utils/recipeSearch.js';
+import recipeCardFactory from '../factories/recipeCardFactory.js';
 
 export default class index {
     constructor() {
@@ -58,6 +58,8 @@ export default class index {
 
         /*ingredients*/
         this.Tags.ingredients = this.recipeInstance.getListOfIngredients(tabResults);
+        this.Tags.ingredients = this.Tags.ingredients.filter((item) => !this.selectedTags.ingredients.includes(item));
+        this.Tags.ingredients.sort();
         console.log(this.Tags.ingredients);
         this.generateFilterIngredient(this.Tags.ingredients);
 
@@ -65,11 +67,16 @@ export default class index {
         /**appliances */
 
         this.Tags.appliance = this.recipeInstance.getListOfAppliance(tabResults);
+        this.Tags.appliance = this.Tags.appliance.filter((item) => !this.selectedTags.appliance.includes(item));
+        this.Tags.appliance.sort();
         console.log(this.Tags.appliance);
+
         this.generateFilterappliances(this.Tags.appliance);
         /*ustensils*/
 
         this.Tags.ustensils = this.recipeInstance.getListOfUstensils(tabResults);
+        this.Tags.ustensils = this.Tags.ustensils.filter((item) => !this.selectedTags.ustensils.includes(item));
+        this.Tags.ustensils.sort();
         console.log(this.Tags.ustensils);
         this.generateFilterUstensilles(this.Tags.ustensils);
 
@@ -108,16 +115,16 @@ export default class index {
     generateFilterIngredient(ingredientsList) {//, keywordField) {
         let IngredientsDropdown = document.querySelector('#ingredientDropdown');
         //pour verifier ql type de tag est cliqué 
-        let tagType = "ingredients";
+        let tagType = 'ingredients';
         IngredientsDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Ingredients_search">';
         //ajouter la recherche dans dropdown ingredients
         let ingSearch = document.getElementById('Ingredients_search');
         ingSearch.addEventListener('keyup', () => {
-            this.searhInFilter("Ingredients_search", "ingredientDropdown")
+            this.searhInFilter('Ingredients_search', 'ingredientDropdown')
         });
 
         for (let i = 0; i < ingredientsList.length; i++) {
-            let newItem = document.createElement("a");
+            let newItem = document.createElement('a');
             newItem.innerText = `${ingredientsList[i]}`;
             //ajouter un acion lister au a href
             // newItem.addEventListener("click",(this.recipeInstance.searchByIngredients(this.searchResult,newItem.innerText)));
@@ -125,7 +132,7 @@ export default class index {
         }
 
         /*gestion des tags*/
-        let aList = IngredientsDropdown.getElementsByTagName("a");
+        let aList = IngredientsDropdown.getElementsByTagName('a');
         this.generateTags(aList, tagType);
 
 
@@ -133,42 +140,42 @@ export default class index {
     }
     generateFilterappliances(appliacesList) {//, keywordField) {
         //pour verifier ql type de tag est cliqué 
-        let tagType = "Appareils";
+        let tagType = 'Appareils';
         let appliancesDropdown = document.querySelector('#appliancesDropdown');
         appliancesDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Appareils_options">';
         //ajouter la recherche dans dropdown ingredients
         let appSearch = document.getElementById('Appareils_options');
         appSearch.addEventListener('keyup', () => {
-            this.searhInFilter("Appareils_options", "appliancesDropdown")
+            this.searhInFilter('Appareils_options', 'appliancesDropdown')
         });
         for (let i = 0; i < appliacesList.length; i++) {
-            let newItem = document.createElement("a");
+            let newItem = document.createElement('a');
             newItem.innerText = `${appliacesList[i]}`;
             appliancesDropdown.appendChild(newItem);
         }
         /*gestion des tags*/
-        let aList = appliancesDropdown.getElementsByTagName("a");
+        let aList = appliancesDropdown.getElementsByTagName('a');
         this.generateTags(aList, tagType);
 
 
         return appliancesDropdown;
     }
     generateFilterUstensilles(ustensillesList) {//, keywordField) {
-        let tagType = "ustensis";
+        let tagType = 'ustensis';
         let ustensillesDropdown = document.querySelector('#ustensilsDropdown');
         ustensillesDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Ustensils_options">';
         //ajouter la recherche dans dropdown ingredients
         let ustSearch = document.getElementById('Ustensils_options');
         ustSearch.addEventListener('keyup', () => {
-            this.searhInFilter("Ustensils_options", "ustensilsDropdown")
+            this.searhInFilter('Ustensils_options', 'ustensilsDropdown')
         });
         for (let i = 0; i < ustensillesList.length; i++) {
-            let newItem = document.createElement("a");
+            let newItem = document.createElement('a');
             newItem.innerText = `${ustensillesList[i]}`;
             ustensillesDropdown.appendChild(newItem);
         }
         /*gestion des tags*/
-        let aList = ustensillesDropdown.getElementsByTagName("a");
+        let aList = ustensillesDropdown.getElementsByTagName('a');
         this.generateTags(aList, tagType);
 
         return ustensillesDropdown;
@@ -179,7 +186,7 @@ export default class index {
      * @param {Array} tabResults 
      */
     updateTaglists(tabResults, tagType, Tag) {
-    
+
         this.Tags.appliance = this.recipeInstance.getListOfAppliance(tabResults);
         for (let i = 0; i < this.Tags.appliance.length; i++) {
             for (let j = 0; j < this.selectedTags.appliance.length; j++) {
@@ -231,17 +238,11 @@ export default class index {
         this.generateFilterUstensilles(this.Tags.ustensils);//, keyWords);
         this.generateFilterIngredient(this.Tags.ingredients);//, keyWords);
 
-        console.log("selected tags are");
+        console.log('selected tags are');
         console.log(this.selectedTags);
 
     }
 
-
-    updateReverse(tabResults, tagType, Tag)
-    {
-        
-
-    }
     /*initialiser la liste des filtres*/
     initFilters() {
         let ingList = this.recipeInstance.getListOfIngredients(this.recipeInstance.recipes);
@@ -291,18 +292,18 @@ export default class index {
 
     /**@param {Array <links>} aList*/
     generateTags(aList, tagType) {
-        let tagsSection = document.querySelector("#generatedTags");
+        let tagsSection = document.querySelector('#generatedTags');
         let filteredTab = [];
-        let close = document.createElement("i");
+        let close = document.createElement('i');
         //else si le mot clé a plus de 3 caracteres 
         for (let i = 0; i < aList.length; i++) {
 
-            aList[i].addEventListener("click", () => {
+            aList[i].addEventListener('click', () => {
 
                 //creation du tag
-                let newTag = document.createElement("button");
-                newTag.setAttribute("type", "button");
-                newTag.classList.add("btn", "btn-primary", "tag-button");
+                let newTag = document.createElement('button');
+                newTag.setAttribute('type', 'button');
+                newTag.classList.add('btn', 'btn-primary', 'tag-button');
                 //ajouter un id au tag
                 let tagId = aList[i].innerText;
                 newTag.setAttribute('id', tagId);
@@ -312,29 +313,29 @@ export default class index {
                 close.innerHTML = '<i class="fa-regular fa-circle-xmark"></i>';
                 newTag.append(close);
                 //add a delete function to tags
-                close.addEventListener("click", () => {
+                close.addEventListener('click', () => {
                     this.deleteTag(tagId);
                 });
                 /* selectionner la fonction de filtre a utiliser */
 
-                if (tagType == "ingredients") {
+                if (tagType == 'ingredients') {
                     //ajouter une classe personnalisée
-                    newTag.classList.add("ingrediant-tag");
+                    newTag.classList.add('ingrediant-tag');
                     tagsSection.appendChild(newTag);
                     filteredTab = this.recipeInstance.searchByIngredients(this.searchResult, aList[i].innerText);
                     //mettre a jour le tableau resultats
                     this.searchResult = filteredTab;
-                    console.log("ingredient filtered tab");
+                    console.log('ingredient filtered tab');
                     console.log(filteredTab);
                     //mettre a jour le reste des listes 
                     this.updateTaglists(this.searchResult, tagType, newTag.innerText);
-                } else if (tagType == "Appareils") {
+                } else if (tagType == 'Appareils') {
                     //recuperer le champs de recherche pour savoir si c'est vide
                     /*if (document.getElementById('search-input').value.length < 3) {
                         this.searchResult = this.recipeInstance.recipes;
                     }*/
                     //ajouter une classe personnalisée
-                    newTag.classList.add("appliance-tag");
+                    newTag.classList.add('appliance-tag');
                     tagsSection.appendChild(newTag);
                     filteredTab = this.recipeInstance.searchByAppliance(this.searchResult, aList[i].innerText);
                     this.searchResult = filteredTab;
@@ -349,7 +350,7 @@ export default class index {
                     }*/
 
                     //ajouter une classe personnalisée
-                    newTag.classList.add("ustensil-tag");
+                    newTag.classList.add('ustensil-tag');
                     tagsSection.appendChild(newTag);
                     filteredTab = this.recipeInstance.searchByUstensils(this.searchResult, aList[i].innerText);
                     this.searchResult = filteredTab;
@@ -380,25 +381,45 @@ export default class index {
      * @param {Dom} tagsSection
      */
     deleteTag(tagId) {
-        let tagClasslist=document.getElementById(tagId).classList;
-       // alert(document.getElementById(tagId).classList);//.contains("ingrediant-tag")) ;
-        if(tagClasslist.contains("ingrediant-tag")){
-            this.selectedTags.ingredients =  this.selectedTags.ingredients.filter((item) => ![tagId].includes(item))
+        let tagClasslist = document.getElementById(tagId).classList;
+        // alert(document.getElementById(tagId).classList);//.contains("ingrediant-tag")) ;
+        if (tagClasslist.contains('ingrediant-tag')) {
+            this.selectedTags.ingredients = this.selectedTags.ingredients.filter((item) => ![tagId].includes(item))
             this.Tags.ingredients.push(tagId);
-            this.searchResult = this.recipeInstance.recipes;
-            for(let i=0; i<this.selectedTags.ingredients.length; i++ ){
-                // chercher par ingrédiuent et concatener 
-            }
-
-
-            //this.updateTaglists(this.searchResult,"","");
-            console.log("je mets à jours après suppression");
+            
+            console.log('je mets à jours après suppression');
             console.log(this.selectedTags);
+        } else {
+            if (tagClasslist.contains('appliance-tag')) {
+
+                this.selectedTags.appliance = this.selectedTags.appliance.filter((item) => ![tagId].includes(item))
+                this.Tags.appliance.push(tagId);
+
+            } else {
+                this.selectedTags.ustensils = this.selectedTags.ustensils.filter((item) => ![tagId].includes(item))
+                this.Tags.ustensils.push(tagId);
+
+            }
         }
 
         document.getElementById(tagId).remove();
-       
-        
+        this.searchResult = this.recipeInstance.recipes;
+
+        for(let i=0; i<this.selectedTags.ingredients.length; i++ ){
+            this.searchResult = this.recipeInstance.searchByIngredients(this.searchResult, this.selectedTags.ingredients[i]);
+        }
+        for(let i=0; i<this.selectedTags.appliance.length; i++ ){
+            this.searchResult = this.recipeInstance.searchByAppliance(this.searchResult, this.selectedTags.appliance[i]);
+        }
+        for(let i=0; i<this.selectedTags.ustensils.length; i++ ){
+            this.searchResult = this.recipeInstance.searchByUstensils(this.searchResult, this.selectedTags.ustensils[i]);
+        }
+
+       // this.updateTaglists(this.searchResult, '', '');
+       this.generateAllTags(this.searchResult );
+       this.displayRecipies(this.searchResult );
+
+
 
 
     }
@@ -411,8 +432,8 @@ export default class index {
     showDropdown(buttonId, dropdownId) {
         let filterButton = document.querySelector(buttonId);
         // let arrow=document.querySelector("#arrow");
-        filterButton.addEventListener("click", () => {
-            document.getElementById(dropdownId).classList.toggle("show");
+        filterButton.addEventListener('click', () => {
+            document.getElementById(dropdownId).classList.toggle('show');
         });
     }
 
@@ -426,13 +447,13 @@ export default class index {
         var keyword = document.getElementById(searchFiledId);
         let filter = keyword.value.toUpperCase();
         let dropdown = document.getElementById(dropdownId);
-        let aList = dropdown.getElementsByTagName("a");
+        let aList = dropdown.getElementsByTagName('a');
         for (let i = 0; i < aList.length; i++) {
             let txtValue = aList[i].textContent || aList[i].innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                aList[i].style.display = "";
+                aList[i].style.display = '';
             } else {
-                aList[i].style.display = "none";
+                aList[i].style.display = 'none';
             }
         }
 
@@ -443,12 +464,13 @@ export default class index {
         /*Recupereer les elements dom boutons et sections*/
         let searchField = document.getElementById('search-input');
         const recipiesSection = document.querySelector('.cards');
-        let keyWords = "";
+        let keyWords = '';
+        /*initialiser le contenu de la page*/
         this.displayRecipies(this.searchResult);
-        //this.updateTaglists(this.searchResult);
-        //init
-        this.initFilters();
 
+        //initialiser les filtres
+       // this.initFilters();
+       this.generateAllTags(this.searchResult);
         searchField.addEventListener('input', () => {
             //recuperer le contenu du champs de recherchrche principale 
             keyWords = searchField.value;
@@ -459,7 +481,7 @@ export default class index {
 
                     //vider la section avant de la remplir de nouveau
                     recipiesSection.innerHTML = '';
-                    document.querySelector("#generatedTags").innerHTML = '';
+                    document.querySelector('#generatedTags').innerHTML = '';
                     this.displayRecipies(this.searchResult);
                 }
                 else {//si aucun resultat trouvé
@@ -468,7 +490,7 @@ export default class index {
 
             } else {// si le chanmp contient moins de 3 caractères 
                 if (keyWords.length != 0) {
-                    recipiesSection.innerHTML = `<p class="not-found">votre mot clé doit contenir au moins 3 caractères</p>`;
+                    recipiesSection.innerHTML = '<p class="not-found">votre mot clé doit contenir au moins 3 caractères</p>';
                 } else {//si le champ est vide 
                     //afficher toutes les recetes d'abord à condiotion que les tags soit vides
 
@@ -477,20 +499,18 @@ export default class index {
                     // this.updateTaglists(this.searchResult);
                     //init
                     this.initFilters();
-
-
-
                     //vider la liste des tags cliqué
-                    document.querySelector("#generatedTags").innerHTML = '';
+                    document.querySelector('#generatedTags').innerHTML = '';
+
                 }
             }
         });
 
         /*afficher tous les tags par deaut avant la recherche*/
         /*ajouter la classe show au differents filtres dropdown"*/
-        this.showDropdown("#ingredient", "ingredientDropdown");
-        this.showDropdown("#Appareils", "appliancesDropdown");
-        this.showDropdown("#ustensils", "ustensilsDropdown");
+        this.showDropdown('#ingredient', 'ingredientDropdown');
+        this.showDropdown('#Appareils', 'appliancesDropdown');
+        this.showDropdown('#ustensils', 'ustensilsDropdown');
 
 
     }
