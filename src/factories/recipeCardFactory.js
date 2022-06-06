@@ -1,34 +1,35 @@
-import ingredientsFactory from "./ingredientsFactory.js";
+import ingredientsFactory from './ingredientsFactory.js';
 export default class recipeCardFactory {
 
-    /**@property {array of recepies} data */
-    constructor(data) {
-        this._data = data;
+  /**@property {array of recepies} data */
+  constructor(data) {
+    this._data = data;
 
-    }
-    /* creer le dom des recette*/
-    /**@param {object array} ingredientTab */
+  }
+  /* creer le dom des recette*/
+  /**@param {object array} ingredientTab */
 
-    getIngredients(ingredientTab) {
+  getIngredients(ingredientTab) {
 
-        let ingredientsList = document.createElement("ul");
-        ingredientsList.classList.add(".ingredients-list");
-        for (let i = 0; i < ingredientTab.length; i++) {
-            const ingredientF = new ingredientsFactory(ingredientTab[i]);
-            ingredientsList.appendChild(ingredientF.getIngredientsLi());
-
-        }
-
-        return ingredientsList.innerHTML;
+    let ingredientsList = document.createElement('ul');
+    ingredientsList.classList.add('.ingredients-list');
+    for (let i = 0; i < ingredientTab.length; i++) {
+      const ingredientF = new ingredientsFactory(ingredientTab[i]);
+      ingredientsList.appendChild(ingredientF.getIngredientsLi());
 
     }
 
-    getrecipeDom() {
+    return ingredientsList.innerHTML;
 
-        const { id, name, ingredients, time, description, appliance, ustensils } = this._data;///--->nouveau;
-        const card = document.createElement('div');
-        card.classList.add('card', 'col-lg-3','col-md-9','recipe','col-xs-12');
-        card.innerHTML = `
+  }
+
+  getrecipeDom() {
+
+    // eslint-disable-next-line no-unused-vars
+    const { id, name, ingredients, time, description, appliance, ustensils } = this._data;///--->nouveau;
+    const card = document.createElement('div');
+    card.classList.add('card', 'col-lg-3', 'col-md-9', 'recipe', 'col-xs-12');
+    card.innerHTML = `
       <div class="card-image-div">
       <img class="card-image" src="./images/cardimage.png" alt="${name}">
       </div>
@@ -44,8 +45,8 @@ export default class recipeCardFactory {
       </div>
         `;
 
-        return card;
+    return card;
 
 
-    }
+  }
 }

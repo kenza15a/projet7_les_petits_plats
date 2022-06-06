@@ -13,9 +13,7 @@ export default class recipeSearch {
      */
     searchInName(keyWords, tabRecipe) {
 
-        //teste de performance
-        console.log('temps d\'execution searchbyname basic')
-        console.time('for');
+
         let keyWordsArray = keyWords.split(' ');
         let recipeResult = [];
         for (let i = 0; i < keyWordsArray.length; i++) {
@@ -28,7 +26,6 @@ export default class recipeSearch {
             }
 
         }
-        console.timeEnd('for')
         return recipeResult;
 
     }
@@ -165,12 +162,12 @@ export default class recipeSearch {
     // A revérifier si on ne loupe des éléments 
     concatener(tab1, tab2) {
         let resultat = [];
-        let temptab = tab1;
+        //let temptab = tab1;
         for (let i = 0; i < tab1.length; i++) {
             resultat.push(tab1[i]);
         }
         for (let i = 0; i < tab2.length; i++) {
-            let testvar = false;
+            //let testvar = false;
             resultat.push(tab2[i]);
         }
 

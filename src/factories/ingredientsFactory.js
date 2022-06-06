@@ -8,11 +8,10 @@ export default class ingredientsFactory {
     getIngredientsLi() {
 
         const { ingredient, quantity, unit } = this._ingredientsTab;
-        let liIngredients = document.createElement("li");
-        if ('unit' in this._ingredientsTab) 
-        {
+        let liIngredients = document.createElement('li');
+        if ('unit' in this._ingredientsTab) {
             liIngredients.innerHTML = `<strong>${ingredient}: </strong> ${quantity}${unit}`;
-        }else{
+        } else {
             liIngredients.innerHTML = `<strong>${ingredient}: </strong> ${quantity}`;
 
         }

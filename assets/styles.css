@@ -42,10 +42,10 @@ header {
     /*width:30%;*/
     margin-right: 5vw;
     margin-bottom: 25px;
-    border-radius:2%;
+    border-radius: 2%;
     border: none;
-   
-    height:400px;
+
+    height: 400px;
 }
 
 .cards {
@@ -60,19 +60,19 @@ header {
     flex-direction: row;
     justify-content: space-between;
     height: 80%;
-  
+
 }
 
 .recipe-content>p {
     text-align: left;
     font-size: 12px;
-    display:-webkit-box;
+    display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 20px;
-    margin-top: 10px ;
+    margin-top: 10px;
 }
 
 /*search*/
@@ -90,7 +90,7 @@ header {
 
 .search-field {
     background-color: #E7E7E7;
-    padding: 15;
+    padding: 15px;
 }
 
 /*filters*/
@@ -111,12 +111,12 @@ header {
 
 #Appareils {
     background-color: #20c997;
-   
+
 }
 
 #ustensils {
     background-color: #dc3545;
-    
+
 }
 
 /* The search field */
@@ -145,7 +145,7 @@ header {
     display: inline-block;
     margin: 0px auto 20px auto;
 
- 
+
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -154,7 +154,7 @@ header {
     display: none;
     position: absolute;
     background-color: #0d6efd;
-    min-width: min-200;
+    min-width: min-content;
     border: none;
     border-radius: 1%;
     z-index: 100;
@@ -189,7 +189,7 @@ header {
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
     display: block;
-    
+
 }
 
 
@@ -246,7 +246,7 @@ header {
 }
 
 #generatedTags {
-    margin: 15p 15px;
+    /*margin: 15px 15px;*/
     padding: 1%;
     display: flex;
     flex-direction: row;
@@ -257,9 +257,11 @@ header {
 .tag-button {
     margin-right: 10px;
 }
+
 .card-body {
     height: 60%;
 }
+
 .fa-regular,
 .fa-circle-xmark {
     margin-left: 10px;
@@ -270,21 +272,22 @@ header {
     border: none;
 }
 
-.ingrediant-tag:hover{
+.ingrediant-tag:hover {
     background-color: #f1f1f1;
     color: #0d6efd;
-    border: solid 0.2px  #0d6efd;
+    border: solid 0.2px #0d6efd;
 }
 
 .appliance-tag {
     background-color: #20c997;
-       border: none;
+    border: none;
 
 }
+
 .appliance-tag:hover {
     background-color: #f1f1f1;
-    color:#20c997;
-    border: solid 0.2px  #20c997;
+    color: #20c997;
+    border: solid 0.2px #20c997;
 
 }
 
@@ -293,23 +296,27 @@ header {
     border: none;
 
 }
+
 .ustensil-tag:hover {
     background-color: #f1f1f1;
-    color:#dc3545;
-    border: solid 0.2px  #dc3545;
+    color: #dc3545;
+    border: solid 0.2px #dc3545;
 
 }
+
 /*.delete-tag{
 
     display: none;
 }*/
 .dropdown-toggle::after {
-    display:none;
+    display: none;
 }
-.fa-chevron-down{
+
+.fa-chevron-down {
     margin-left: 25px;
 }
-.arrow_up{
-    
-    content:'\f077'; 
+
+.arrow_up {
+
+    content: '\f077';
 }
