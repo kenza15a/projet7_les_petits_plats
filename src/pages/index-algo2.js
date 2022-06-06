@@ -27,7 +27,6 @@ export default class index {
         let recipeResult = [];
         for (let i = 0; i < keyWordsArray.length; i++) {
             if (keyWordsArray[i].length >= 3) {
-                //let recipeResult=this.recipies.filter(recipe=>recipe.name.toLowerCase().includes(keyWordsArray[i].toLowerCase()) || (recipe.description.toLowerCase().includes(keyWordsArray[i].toLowerCase())) || this.searchInIngredients(keyWordsArray[i], recipe.ingredients));
                 tabRecepies.forEach(recipe => {
                     /*try to use filter*/
                     if (recipe.name.toLowerCase().includes(keyWordsArray[i].toLowerCase()) || (recipe.description.toLowerCase().includes(keyWordsArray[i].toLowerCase())) || this.searchInIngredients(keyWordsArray[i], recipe.ingredients))
@@ -37,7 +36,6 @@ export default class index {
 
             }
         }
-        // console.log(recipeResult)
         this.generateAllTags(recipeResult);
 
         return recipeResult;
@@ -67,8 +65,9 @@ export default class index {
         let filteredTab = [];
 
         recipieTab.forEach(recipie => {
+
             recipie.ingredients.forEach(ingredient => {
-                if (ingredient.ingredient.toLowerCase() == ingredientTag.toLowerCase()) { // a remplacer par un array.filter
+                if (ingredient.ingredient.toLowerCase() == ingredientTag.toLowerCase()) { 
                     filteredTab.push(recipie);
                 }
             });
@@ -81,7 +80,7 @@ export default class index {
     searchByAppliance(recipieTab, applianceTag) {
         let filteredTab = [];
         recipieTab.forEach(recipe => {
-            if (recipe.appliance.toLowerCase() == applianceTag.toLowerCase()) {//a remplacer par array.filter
+            if (recipe.appliance.toLowerCase() == applianceTag.toLowerCase()) {
                 filteredTab.push(recipe);
             }
 
@@ -93,7 +92,7 @@ export default class index {
         let filteredTab = [];
         recipieTab.forEach(recipe => {
             recipe.ustensils.forEach(ustensil => {
-                if (ustensil.toLowerCase() == ustensilTag.toLowerCase()) { //a remplacer par array.filter
+                if (ustensil.toLowerCase() == ustensilTag.toLowerCase()) { 
                     filteredTab.push(recipe);
                 }
 
@@ -120,7 +119,7 @@ export default class index {
 
         /**eleminer les doublants*/
 
-        //recipeResult = recipeResult.filter((value, index) => recipeResult.indexOf(value) === index);
+        //utilisation de l'objet set dans un array pour traité les doublant et le tri du tableau a la fois
         recipeResult = [...new Set(recipeResult)];//Sets are a new object type with ES6 (ES2015) that allows you to create collections of unique values.
 
         return recipeResult;
@@ -136,7 +135,7 @@ export default class index {
 
         /**eleminer les doublants*/
 
-        recipeResult = [...new Set(recipeResult)];//Sets are a new object type with ES6 (ES2015) that allows you to create collections of unique values.
+        recipeResult = [...new Set(recipeResult)]; //Sets are a new object type with ES6 (ES2015) that allows you to create collections of unique values.
 
         return recipeResult;
     }
@@ -146,13 +145,9 @@ export default class index {
             recipeResult.push(recipie.appliance);
 
         });
-
         /**eleminer les doublants*/
-
-        //recipeResult = recipeResult.filter((value, index) => recipeResult.indexOf(value) === index);
         recipeResult = [...new Set(recipeResult)];//Sets are a new object type with ES6 (ES2015) that allows you to create collections of unique values.
-        //console.log('new recipie result after set appliance');
-        // console.log(recipeResult);
+
         return recipeResult;
     }
 
@@ -163,7 +158,6 @@ export default class index {
         tabRecipie.forEach(recipe => {
             const recipeCrd = new recipeCardFactory(recipe);
             const newCard = recipeCrd.getrecipeDom();
-            // recipiesSconstection.removeChild(recipiesSection.firstChild);
             recipiesSection.appendChild(newCard);
 
         });
@@ -172,7 +166,6 @@ export default class index {
 
         return recipiesSection;
     }
-
     /*generer les dropdowns listes des differents filtres */
     generateFilterIngredient(ingredientsList) {
         let IngredientsDropdown = document.querySelector('#ingredientDropdown');
@@ -180,6 +173,7 @@ export default class index {
         let tagType = 'ingredients';
         IngredientsDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Ingredients_search">';
         let ingSearch = document.getElementById('Ingredients_search');
+        //recherche dans la liste dropdown 
         ingSearch.addEventListener('keyup', () => {
             this.searhInFilter('Ingredients_search', 'ingredientDropdown')
         });
@@ -203,6 +197,7 @@ export default class index {
         appliancesDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Appareils_options">';
         //ajouter la recherche dans dropdown ingredients
         let appSearch = document.getElementById('Appareils_options');
+        //recherche dans la liste dropdown 
         appSearch.addEventListener('keyup', () => {
             this.searhInFilter('Appareils_options', 'appliancesDropdown')
         });
@@ -226,6 +221,7 @@ export default class index {
         ustensillesDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Ustensils_options">';
         //ajouter la recherche dans dropdown ingredients
         let ustSearch = document.getElementById('Ustensils_options');
+        //recherche dans la liste dropdown 
         ustSearch.addEventListener('keyup', () => {
             this.searhInFilter('Ustensils_options', 'ustensilsDropdown')
         });
@@ -248,9 +244,6 @@ export default class index {
      * @param {Array} tabResults 
      */
     updateTaglists(tabResults, tagType, Tag) {
-        /*  this.selectedTags.appliance = this.selectedTags.appliance.filter((item) => ![tagId].includes(item))
-                        this.Tags.appliance.push(tagId);
-        */
         this.Tags.appliance = this.getListOfAppliance(tabResults);
         this.Tags.appliance = this.Tags.appliance.filter((item) => !this.selectedTags.appliance.includes(item));
         console.log('tags.appliance');
@@ -262,8 +255,8 @@ export default class index {
         console.log(this.Tags.ustensils);
         /*ingredients*/
         this.Tags.ingredients = this.getListOfIngredients(tabResults);
-     
-        this.Tags.ingredients =  this.Tags.ingredients.filter((item) => !this.selectedTags.ingredients.includes(item));
+
+        this.Tags.ingredients = this.Tags.ingredients.filter((item) => !this.selectedTags.ingredients.includes(item));
         console.log('tags ingredients');
         console.log(this.Tags.ingredients);
         this.removeTag(this.Tags, Tag, tagType);
@@ -280,13 +273,11 @@ export default class index {
         }
 
 
+        /*mise a jour des listes dropdown*/
+        this.generateFilterappliances(this.Tags.appliance);
+        this.generateFilterUstensilles(this.Tags.ustensils);
+        this.generateFilterIngredient(this.Tags.ingredients);
 
-        this.generateFilterappliances(this.Tags.appliance);//, keyWords);
-        this.generateFilterUstensilles(this.Tags.ustensils);//, keyWords);
-        this.generateFilterIngredient(this.Tags.ingredients);//, keyWords);
-
-        console.log('selected tags are');
-        console.log(this.selectedTags);
 
     }
     /*Action de suppression suite au clique sur le tag  dans la liste (dropdown ) */
@@ -294,8 +285,7 @@ export default class index {
         switch (TagType) {
             //supprimr le tag du tableau des tags selon son type 
             case 'ingredients':
-                /* this.selectedTags.appliance = this.selectedTags.appliance.filter((item) => ![tagId].includes(item))*/
-
+                //supprime le tag de la liste correspendante a son type et laisser que  les elements qui sont different du tag
                 TabTags.ingredients = TabTags.ingredients.filter((item) => ![Tag].includes(item));
                 break;
             case 'Appareils':
@@ -328,7 +318,7 @@ export default class index {
         this.Tags.ingredients = this.getListOfIngredients(tabResults);
         this.Tags.ingredients = this.Tags.ingredients.filter((item) => !this.selectedTags.ingredients.includes(item));
         this.Tags.ingredients.sort();
-        console.log(this.Tags.ingredients);
+        //  console.log(this.Tags.ingredients);
         this.generateFilterIngredient(this.Tags.ingredients);
 
 
@@ -337,7 +327,7 @@ export default class index {
         this.Tags.appliance = this.getListOfAppliance(tabResults);
         this.Tags.appliance = this.Tags.appliance.filter((item) => !this.selectedTags.appliance.includes(item));
         this.Tags.appliance.sort();
-        console.log(this.Tags.appliance);
+        // console.log(this.Tags.appliance);
 
         this.generateFilterappliances(this.Tags.appliance);
         /*ustensils*/
@@ -345,7 +335,7 @@ export default class index {
         this.Tags.ustensils = this.getListOfUstensils(tabResults);
         this.Tags.ustensils = this.Tags.ustensils.filter((item) => !this.selectedTags.ustensils.includes(item));
         this.Tags.ustensils.sort();
-        console.log(this.Tags.ustensils);
+        // console.log(this.Tags.ustensils);
         this.generateFilterUstensilles(this.Tags.ustensils);
 
     }
@@ -356,7 +346,7 @@ export default class index {
         let filteredTab = [];
         let close = document.createElement('i');
         //else si le mot clé a plus de 3 caracteres 
-        Array.from(aList).forEach(a => {
+        Array.from(aList).forEach(a => { //on transforme la nodelist a un array 
             a.addEventListener('click', () => {
 
                 //creation du tag
@@ -384,8 +374,8 @@ export default class index {
                     filteredTab = this.searchByIngredients(this.searchResult, a.innerText);
                     //mettre a jour le tableau resultats
                     this.searchResult = filteredTab;
-                    console.log('ingredient filtered tab');
-                    console.log(filteredTab);
+                    /*console.log('ingredient filtered tab');
+                    console.log(filteredTab);*/
                     //mettre a jour le reste des listes 
                     this.updateTaglists(this.searchResult, tagType, newTag.innerText);
                 } else if (tagType == 'Appareils') {
@@ -398,10 +388,7 @@ export default class index {
                     this.searchResult = filteredTab;
                     this.updateTaglists(this.searchResult, tagType, newTag.innerText);
 
-
                 } else {
-                    //recuperer le champs de recherche pour savoir si c'est vide
-
                     //ajouter une classe personnalisée
                     newTag.classList.add('ustensil-tag');
                     tagsSection.appendChild(newTag);
@@ -430,7 +417,6 @@ export default class index {
      */
     deleteTag(tagId) {
         let tagClasslist = document.getElementById(tagId).classList;
-        // alert(document.getElementById(tagId).classList);//.contains("ingrediant-tag")) ;
         if (tagClasslist.contains('ingrediant-tag')) {
             this.selectedTags.ingredients = this.selectedTags.ingredients.filter((item) => ![tagId].includes(item))
             this.Tags.ingredients.push(tagId);
@@ -469,10 +455,8 @@ export default class index {
         this.generateAllTags(this.searchResult);
         this.displayRecipies(this.searchResult);
 
-
-
-
     }
+    /*lancer une recherche par clavier dans la liste des filtres*/
     searhInFilter(searchFiledId, dropdownId) {
         var keyword = document.getElementById(searchFiledId);
         let filter = keyword.value.toUpperCase();
@@ -489,10 +473,8 @@ export default class index {
 
     }
 
-
     renderPage() {
 
-        //let searchButton = document.querySelector("#search-btn");
         let searchField = document.getElementById('search-input');
         const recipiesSection = document.querySelector('.cards');
         let keyWords = '';
@@ -518,7 +500,7 @@ export default class index {
                 if (keyWords.length != 0) {
                     recipiesSection.innerHTML = '<p class="not-found">votre mot clé doit contenir au moins 3 caractères</p>';
                 } else {//si le champ est vide 
-                    recipiesSection.innerHTML ='';
+                    recipiesSection.innerHTML = '';
                     this.searchResult = recipes;
                     this.displayRecipies(this.searchResult);
                     this.generateAllTags(this.searchResult);
@@ -526,28 +508,17 @@ export default class index {
 
                 }
             }
-            /*Remplir les dropdown des filtres*/
-            /*ingredients*/
 
-            /*generateAlltags*/
-            /*  let ingList = this.getListOfIngredients(this.searchResult);
-              let appliacesList=this.getListOfAppliance(this.searchResult);
-              console.log(ingList);
-              this.generateFilterIngredient(ingList, keyWords);
-              this.generateFilterappliances(appliacesList, keyWords);*/
+
         });
 
         /*ajouter la classe show au differents filtres dropdown"*/
         this.showDropdown('#ingredient', 'ingredientDropdown');
         this.showDropdown('#Appareils', 'appliancesDropdown');
         this.showDropdown('#ustensils', 'ustensilsDropdown');
-        /* let searchInput=document.querySelector('#Ingredients_search');
-         searchInput.addEventListener("keyup", this.filterIngredients());*/
+
 
     }
-
-
-
 }
 let newPage = new index();
 newPage.renderPage();

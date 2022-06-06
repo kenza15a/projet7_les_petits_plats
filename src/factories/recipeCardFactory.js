@@ -8,7 +8,7 @@ export default class recipeCardFactory {
   }
   /* creer le dom des recette*/
   /**@param {object array} ingredientTab */
-
+/*recuperer la liste des ingredients d'une recette */
   getIngredients(ingredientTab) {
 
     let ingredientsList = document.createElement('ul');
@@ -22,6 +22,7 @@ export default class recipeCardFactory {
     return ingredientsList.innerHTML;
 
   }
+  /*Construire le DOM des cartes des differentes recettes*/
 
   getrecipeDom() {
 

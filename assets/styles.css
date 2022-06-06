@@ -320,3 +320,12 @@ header {
 
     content: '\f077';
 }
+.up{
+    z-index: 100;
+    transform: translateY(-60px);
+}
+.button-hide{
+    display: none;
+    width: 0;
+    height: 0;
+}

@@ -5,6 +5,7 @@ export default class ingredientsFactory {
         this._ingredientsTab = ingredientsTab;
 
     }
+    /*lister les ingredients d'une recette*/
     getIngredientsLi() {
 
         const { ingredient, quantity, unit } = this._ingredientsTab;

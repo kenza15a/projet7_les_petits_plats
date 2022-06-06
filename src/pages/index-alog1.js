@@ -60,7 +60,6 @@ export default class index {
         this.Tags.ingredients = this.recipeInstance.getListOfIngredients(tabResults);
         this.Tags.ingredients = this.Tags.ingredients.filter((item) => !this.selectedTags.ingredients.includes(item));
         this.Tags.ingredients.sort();
-        console.log(this.Tags.ingredients);
         this.generateFilterIngredient(this.Tags.ingredients);
 
 
@@ -69,7 +68,6 @@ export default class index {
         this.Tags.appliance = this.recipeInstance.getListOfAppliance(tabResults);
         this.Tags.appliance = this.Tags.appliance.filter((item) => !this.selectedTags.appliance.includes(item));
         this.Tags.appliance.sort();
-        console.log(this.Tags.appliance);
 
         this.generateFilterappliances(this.Tags.appliance);
         /*ustensils*/
@@ -77,7 +75,6 @@ export default class index {
         this.Tags.ustensils = this.recipeInstance.getListOfUstensils(tabResults);
         this.Tags.ustensils = this.Tags.ustensils.filter((item) => !this.selectedTags.ustensils.includes(item));
         this.Tags.ustensils.sort();
-        console.log(this.Tags.ustensils);
         this.generateFilterUstensilles(this.Tags.ustensils);
 
     }
@@ -127,7 +124,6 @@ export default class index {
             let newItem = document.createElement('a');
             newItem.innerText = `${ingredientsList[i]}`;
             //ajouter un acion lister au a href
-            // newItem.addEventListener("click",(this.recipeInstance.searchByIngredients(this.searchResult,newItem.innerText)));
             IngredientsDropdown.appendChild(newItem);
         }
 
@@ -156,7 +152,6 @@ export default class index {
         /*gestion des tags*/
         let aList = appliancesDropdown.getElementsByTagName('a');
         this.generateTags(aList, tagType);
-
 
         return appliancesDropdown;
     }
@@ -237,9 +232,6 @@ export default class index {
         this.generateFilterappliances(this.Tags.appliance);//, keyWords);
         this.generateFilterUstensilles(this.Tags.ustensils);//, keyWords);
         this.generateFilterIngredient(this.Tags.ingredients);//, keyWords);
-
-        console.log('selected tags are');
-        console.log(this.selectedTags);
 
     }
 
@@ -330,10 +322,6 @@ export default class index {
                     //mettre a jour le reste des listes 
                     this.updateTaglists(this.searchResult, tagType, newTag.innerText);
                 } else if (tagType == 'Appareils') {
-                    //recuperer le champs de recherche pour savoir si c'est vide
-                    /*if (document.getElementById('search-input').value.length < 3) {
-                        this.searchResult = this.recipeInstance.recipes;
-                    }*/
                     //ajouter une classe personnalisée
                     newTag.classList.add('appliance-tag');
                     tagsSection.appendChild(newTag);
@@ -341,13 +329,8 @@ export default class index {
                     this.searchResult = filteredTab;
                     this.updateTaglists(this.searchResult, tagType, newTag.innerText);
 
-                    //this.removeTag(this.Tags, newTag.innerText, tagType);
-                    //this.generateFilterappliances(this.Tags.appliance);
                 } else {
-                    //recuperer le champs de recherche pour savoir si c'est vide
-                    /*if (document.getElementById('search-input').value.length < 3) {
-                        this.searchResult = this.recipeInstance.recipes;
-                    }*/
+
 
                     //ajouter une classe personnalisée
                     newTag.classList.add('ustensil-tag');
@@ -355,10 +338,8 @@ export default class index {
                     filteredTab = this.recipeInstance.searchByUstensils(this.searchResult, aList[i].innerText);
                     this.searchResult = filteredTab;
                     this.updateTaglists(this.searchResult, tagType, newTag.innerText);
-                    //this.removeTag(this.Tags, newTag.innerText, "Ustensils");
-                    //this.generateFilterUstensilles(this.Tags.ustensils);
-                }
 
+                }
                 //Suppression du tag 
 
                 //vider le contenu de la section 
@@ -369,9 +350,6 @@ export default class index {
             });
 
         }
-
-
-
         return tagsSection;
     }
 
@@ -382,13 +360,10 @@ export default class index {
      */
     deleteTag(tagId) {
         let tagClasslist = document.getElementById(tagId).classList;
-        // alert(document.getElementById(tagId).classList);//.contains("ingrediant-tag")) ;
+
         if (tagClasslist.contains('ingrediant-tag')) {
             this.selectedTags.ingredients = this.selectedTags.ingredients.filter((item) => ![tagId].includes(item))
             this.Tags.ingredients.push(tagId);
-            
-            console.log('je mets à jours après suppression');
-            console.log(this.selectedTags);
         } else {
             if (tagClasslist.contains('appliance-tag')) {
 
@@ -404,20 +379,20 @@ export default class index {
 
         document.getElementById(tagId).remove();
         this.searchResult = this.recipeInstance.recipes;
-
-        for(let i=0; i<this.selectedTags.ingredients.length; i++ ){
+        /*mise a jour des listes dropdown selon le tag supprimé*/
+        for (let i = 0; i < this.selectedTags.ingredients.length; i++) {
             this.searchResult = this.recipeInstance.searchByIngredients(this.searchResult, this.selectedTags.ingredients[i]);
         }
-        for(let i=0; i<this.selectedTags.appliance.length; i++ ){
+        for (let i = 0; i < this.selectedTags.appliance.length; i++) {
             this.searchResult = this.recipeInstance.searchByAppliance(this.searchResult, this.selectedTags.appliance[i]);
         }
-        for(let i=0; i<this.selectedTags.ustensils.length; i++ ){
+        for (let i = 0; i < this.selectedTags.ustensils.length; i++) {
             this.searchResult = this.recipeInstance.searchByUstensils(this.searchResult, this.selectedTags.ustensils[i]);
         }
 
-       // this.updateTaglists(this.searchResult, '', '');
-       this.generateAllTags(this.searchResult );
-       this.displayRecipies(this.searchResult );
+        // this.updateTaglists(this.searchResult, '', '');
+        this.generateAllTags(this.searchResult);
+        this.displayRecipies(this.searchResult);
 
 
 
@@ -436,6 +411,7 @@ export default class index {
             document.getElementById(dropdownId).classList.toggle('show');
         });
     }
+
 
     //pour faire une recherche sur tags---------------->not working
     /**
@@ -469,8 +445,7 @@ export default class index {
         this.displayRecipies(this.searchResult);
 
         //initialiser les filtres
-       // this.initFilters();
-       this.generateAllTags(this.searchResult);
+        this.generateAllTags(this.searchResult);
         searchField.addEventListener('input', () => {
             //recuperer le contenu du champs de recherchrche principale 
             keyWords = searchField.value;
@@ -512,10 +487,7 @@ export default class index {
         this.showDropdown('#Appareils', 'appliancesDropdown');
         this.showDropdown('#ustensils', 'ustensilsDropdown');
 
-
     }
-
-
 }
 
 let newPage = new index();
