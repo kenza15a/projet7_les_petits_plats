@@ -421,15 +421,15 @@ input:focus {
 border-radius: 5px;
 }
 
-.centered,
-h1,
+/*.centered,*/
+/*h1,
 h5 {
     text-align: center;
     font-style: italic;
-}
-.first-page{
+}*/
+/*.first-page{
     background-image: url('../public/images/logo.png');
     background-position: 10px 15px;
     background-size: 25px;
     background-repeat:repeat;
-}
+}*/
