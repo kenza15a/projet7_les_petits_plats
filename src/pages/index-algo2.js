@@ -67,7 +67,7 @@ export default class index {
         recipieTab.forEach(recipie => {
 
             recipie.ingredients.forEach(ingredient => {
-                if (ingredient.ingredient.toLowerCase() == ingredientTag.toLowerCase()) { 
+                if (ingredient.ingredient.toLowerCase() == ingredientTag.toLowerCase()) {
                     filteredTab.push(recipie);
                 }
             });
@@ -92,7 +92,7 @@ export default class index {
         let filteredTab = [];
         recipieTab.forEach(recipe => {
             recipe.ustensils.forEach(ustensil => {
-                if (ustensil.toLowerCase() == ustensilTag.toLowerCase()) { 
+                if (ustensil.toLowerCase() == ustensilTag.toLowerCase()) {
                     filteredTab.push(recipe);
                 }
 
@@ -169,9 +169,13 @@ export default class index {
     /*generer les dropdowns listes des differents filtres */
     generateFilterIngredient(ingredientsList) {
         let IngredientsDropdown = document.querySelector('#ingredientDropdown');
+        let ingredientsListDiv = document.createElement('div');
+        ingredientsListDiv.setAttribute('id', 'ingredientDropdown-list');
+        //let ingredientsListDiv=document.querySelector('#ingredientDropdown-list'); //nouveau
         //pour verifier ql type de tag est cliqué 
         let tagType = 'ingredients';
-        IngredientsDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Ingredients_search">';
+        IngredientsDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Ingredients_search"> ';
+        IngredientsDropdown.appendChild(ingredientsListDiv);
         let ingSearch = document.getElementById('Ingredients_search');
         //recherche dans la liste dropdown 
         ingSearch.addEventListener('keyup', () => {
@@ -180,11 +184,11 @@ export default class index {
         ingredientsList.forEach(ingredient => {
             let newItem = document.createElement('a');
             newItem.innerText = `${ingredient}`;
-            IngredientsDropdown.appendChild(newItem);
+            ingredientsListDiv.appendChild(newItem);
         }
         );
         /*gestion des tags*/
-        let aList = IngredientsDropdown.getElementsByTagName('a');
+        let aList = ingredientsListDiv.getElementsByTagName('a');//nouveau
         this.generateTags(aList, tagType);
 
 
@@ -194,7 +198,10 @@ export default class index {
         //pour verifier ql type de tag est cliqué 
         let tagType = 'Appareils';
         let appliancesDropdown = document.querySelector('#appliancesDropdown');
+        let applianceListDiv = document.createElement('div');
+        applianceListDiv.setAttribute('id', 'applianceDropdown-list');
         appliancesDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Appareils_options">';
+        appliancesDropdown.appendChild(applianceListDiv);
         //ajouter la recherche dans dropdown ingredients
         let appSearch = document.getElementById('Appareils_options');
         //recherche dans la liste dropdown 
@@ -204,12 +211,12 @@ export default class index {
         appliacesList.forEach(appliance => {
             let newItem = document.createElement('a');
             newItem.innerText = `${appliance}`;
-            appliancesDropdown.appendChild(newItem);
+            applianceListDiv.appendChild(newItem);
         });
         /*
     
         /*gestion des tags*/
-        let aList = appliancesDropdown.getElementsByTagName('a');
+        let aList = applianceListDiv.getElementsByTagName('a');
         this.generateTags(aList, tagType);
 
 
@@ -218,7 +225,10 @@ export default class index {
     generateFilterUstensilles(ustensillesList) {//, keywordField) {
         let tagType = 'ustensis';
         let ustensillesDropdown = document.querySelector('#ustensilsDropdown');
+        let ustensillesListDiv = document.createElement('div');
+        ustensillesListDiv.setAttribute('id', 'ustensillesDropdown-list');
         ustensillesDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Ustensils_options">';
+        ustensillesDropdown.appendChild(ustensillesListDiv);
         //ajouter la recherche dans dropdown ingredients
         let ustSearch = document.getElementById('Ustensils_options');
         //recherche dans la liste dropdown 
@@ -228,11 +238,11 @@ export default class index {
         ustensillesList.forEach(ustensilElement => {
             let newItem = document.createElement('a');
             newItem.innerText = `${ustensilElement}`;
-            ustensillesDropdown.appendChild(newItem);
+            ustensillesListDiv.appendChild(newItem);
         })
 
         /*gestion des tags*/
-        let aList = ustensillesDropdown.getElementsByTagName('a');
+        let aList = ustensillesListDiv.getElementsByTagName('a');
         this.generateTags(aList, tagType);
 
         return ustensillesDropdown;
@@ -474,7 +484,6 @@ export default class index {
     }
 
     renderPage() {
-
         let searchField = document.getElementById('search-input');
         const recipiesSection = document.querySelector('.cards');
         let keyWords = '';

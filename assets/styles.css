@@ -131,7 +131,18 @@ header {
     font-size: 16px;
     padding: 14px 20px 12px 45px;
     border: none;
-    border-bottom: 1px solid #ddd;
+
+}
+
+/*#Ingredients_search{
+    background-color: #0d6efd;
+    color:#fff;
+
+}*/
+#ingredientDropdown input[type=text] {
+    background-color: #0d6efd;
+    color: #fff;
+
 }
 
 /* The search field when it gets focus/clicked on */
@@ -188,10 +199,21 @@ header {
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
-    display: block;
-
+    /* display: block; */
+    width: 65vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /*margin-bottom: 2rem !important;
+    z-index: 100;*/
 }
 
+.show a {
+    width: calc(275% / 14 - 0.5rem);
+    white-space: normal;
+    line-height: 0.8rem;
+    width: 20%;
+}
 
 /*card images*/
 .card-image-div {
@@ -320,12 +342,61 @@ header {
 
     content: '\f077';
 }
-.up{
-    z-index: 100;
-    transform: translateY(-60px);
+
+#ingredientDropdown-list {
+    width: 65vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 2rem !important;
+    line-height: 0.6rem;
 }
-.button-hide{
-    display: none;
-    width: 0;
-    height: 0;
+
+#Ingredients_search {
+    background-color: #0d6efd;
+    border: transparent;
+}
+
+/*apapreils*/
+#Appareils_options {
+    background-color: #20c997;
+    border: transparent;
+
+}
+
+#applianceDropdown-list {
+    width: 65vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 2rem !important;
+    line-height: 0.6rem;
+
+}
+/*ustensils*/
+#Ustensils_options{
+    background-color:#dc3545;
+    border: transparent;
+}
+#ustensillesDropdown-list{
+    width: 65vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 2rem !important;
+    line-height: 0.6rem;
+
+}
+
+::placeholder {
+    color: rgb(255, 255, 255);
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+input:focus {
+    outline: none;
+}
+.prior{
+    z-index: 1000;
 }

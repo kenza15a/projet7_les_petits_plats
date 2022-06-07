@@ -113,7 +113,10 @@ export default class index {
         let IngredientsDropdown = document.querySelector('#ingredientDropdown');
         //pour verifier ql type de tag est cliqué 
         let tagType = 'ingredients';
+        let ingredientsListDiv=document.createElement('div');
+        ingredientsListDiv.setAttribute('id', 'ingredientDropdown-list');
         IngredientsDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Ingredients_search">';
+        IngredientsDropdown.appendChild(ingredientsListDiv);
         //ajouter la recherche dans dropdown ingredients
         let ingSearch = document.getElementById('Ingredients_search');
         ingSearch.addEventListener('keyup', () => {
@@ -124,11 +127,11 @@ export default class index {
             let newItem = document.createElement('a');
             newItem.innerText = `${ingredientsList[i]}`;
             //ajouter un acion lister au a href
-            IngredientsDropdown.appendChild(newItem);
+            ingredientsListDiv.appendChild(newItem);
         }
 
         /*gestion des tags*/
-        let aList = IngredientsDropdown.getElementsByTagName('a');
+        let aList = ingredientsListDiv.getElementsByTagName('a');
         this.generateTags(aList, tagType);
 
 
@@ -138,7 +141,10 @@ export default class index {
         //pour verifier ql type de tag est cliqué 
         let tagType = 'Appareils';
         let appliancesDropdown = document.querySelector('#appliancesDropdown');
+        let applianceListDiv=document.createElement('div');
+        applianceListDiv.setAttribute('id', 'applianceDropdown-list');
         appliancesDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Appareils_options">';
+        appliancesDropdown.appendChild(applianceListDiv);
         //ajouter la recherche dans dropdown ingredients
         let appSearch = document.getElementById('Appareils_options');
         appSearch.addEventListener('keyup', () => {
@@ -147,10 +153,10 @@ export default class index {
         for (let i = 0; i < appliacesList.length; i++) {
             let newItem = document.createElement('a');
             newItem.innerText = `${appliacesList[i]}`;
-            appliancesDropdown.appendChild(newItem);
+            applianceListDiv.appendChild(newItem);
         }
         /*gestion des tags*/
-        let aList = appliancesDropdown.getElementsByTagName('a');
+        let aList = applianceListDiv.getElementsByTagName('a');
         this.generateTags(aList, tagType);
 
         return appliancesDropdown;
@@ -158,7 +164,10 @@ export default class index {
     generateFilterUstensilles(ustensillesList) {//, keywordField) {
         let tagType = 'ustensis';
         let ustensillesDropdown = document.querySelector('#ustensilsDropdown');
+        let ustensillesListDiv=document.createElement('div');
+        ustensillesListDiv.setAttribute('id', 'ustensillesDropdown-list');
         ustensillesDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Ustensils_options">';
+        ustensillesDropdown.appendChild(ustensillesListDiv);
         //ajouter la recherche dans dropdown ingredients
         let ustSearch = document.getElementById('Ustensils_options');
         ustSearch.addEventListener('keyup', () => {
@@ -167,10 +176,10 @@ export default class index {
         for (let i = 0; i < ustensillesList.length; i++) {
             let newItem = document.createElement('a');
             newItem.innerText = `${ustensillesList[i]}`;
-            ustensillesDropdown.appendChild(newItem);
+            ustensillesListDiv.appendChild(newItem);
         }
         /*gestion des tags*/
-        let aList = ustensillesDropdown.getElementsByTagName('a');
+        let aList = ustensillesListDiv.getElementsByTagName('a');
         this.generateTags(aList, tagType);
 
         return ustensillesDropdown;
@@ -409,6 +418,7 @@ export default class index {
         // let arrow=document.querySelector("#arrow");
         filterButton.addEventListener('click', () => {
             document.getElementById(dropdownId).classList.toggle('show');
+            document.getElementById(dropdownId).classList.toggle('prior');
         });
     }
 
