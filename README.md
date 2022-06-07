@@ -30,6 +30,5 @@ Une recherche dans les trois sections ingrédients, titres et description est fa
 Page d'accueil du site 
 public index.html sur les deux branches
 
-cliquez   [ICI] (https://github.com/kenza15a/projet7_les_petits_plats/blob/algorithme1/public/index.html) pour consulter la page d'accueil algo 01 
-cliquez   [ICI] (https://github.com/kenza15a/projet7_les_petits_plats/blob/algorithme2/public/index.html) pour consulter la page d'accueil algo 02 
-
+[cliquez ici pour consulter la page d'accueil algo 01](https://github.com/kenza15a/projet7_les_petits_plats/blob/algorithme1/public/index.html)  
+[cliquez ici pour consulter la page d'accueil algo 02](https://github.com/kenza15a/projet7_les_petits_plats/blob/algorithme2/public/index.html)
