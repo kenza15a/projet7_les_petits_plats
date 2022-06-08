@@ -102,7 +102,7 @@ header {
     font-size: 16px;
     border: none;
     cursor: pointer;
-    border-radius: 5%;
+    border-radius: 5px;
     min-width: 120px;
     width: 200px;
     font-weight: 600;
@@ -131,7 +131,18 @@ header {
     font-size: 16px;
     padding: 14px 20px 12px 45px;
     border: none;
-    border-bottom: 1px solid #ddd;
+
+}
+
+/*#Ingredients_search{
+    background-color: #0d6efd;
+    color:#fff;
+
+}*/
+#ingredientDropdown input[type=text] {
+    background-color: #0d6efd;
+    color: #fff;
+
 }
 
 /* The search field when it gets focus/clicked on */
@@ -188,10 +199,21 @@ header {
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
-    display: block;
-
+    /* display: block; */
+    width: 65vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /*margin-bottom: 2rem !important;
+    z-index: 100;*/
 }
 
+.show a {
+    width: calc(275% / 14 - 0.5rem);
+    white-space: normal;
+    line-height: 0.8rem;
+    width: 20%;
+}
 
 /*card images*/
 .card-image-div {
@@ -210,7 +232,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    font-size: 20px;
+    font-size: 0.8rem;
 }
 
 .time .fa-clock {
@@ -231,6 +253,9 @@ header {
 .ingredients-list {
     list-style: none;
     margin-left: -30px;
+    width:90%;
+}.ingredients-list li span{
+    margin-right:20px;
 }
 
 .not-found {
@@ -319,4 +344,98 @@ header {
 .arrow_up {
 
     content: '\f077';
+}
+.arrow-turn{
+    transform: rotate(180deg);
+}
+
+#ingredientDropdown-list {
+    width: 65vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 2rem !important;
+    line-height: 0.6rem;
+}
+
+#Ingredients_search {
+    background-color: #0d6efd;
+    border: transparent;
+}
+
+/*apapreils*/
+#Appareils_options {
+    background-color: #20c997;
+    border: transparent;
+
+}
+
+#applianceDropdown-list {
+    width: 65vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 2rem !important;
+    line-height: 0.6rem;
+
+}
+
+/*ustensils*/
+#Ustensils_options {
+    background-color: #dc3545;
+    border: transparent;
+}
+
+#ustensillesDropdown-list {
+    width: 65vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 2rem !important;
+    line-height: 0.6rem;
+
+}
+
+::placeholder {
+    color: rgb(255, 255, 255);
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+input:focus {
+    outline: none;
+}
+
+.prior {
+    z-index: 1000;
+}
+
+
+.hide{
+    display: none;
+}
+
+@media screen and (max-width: 640px) {
+    #ingredientDropdown-list {
+        width: 90%;
+        display: block;
+        margin-bottom: 2rem !important;
+        line-height: 0.6rem;
+    }
+    .show a {
+        width: calc(275% / 14 - 0.5rem);
+        white-space: normal;
+        line-height: 0.8rem;
+        width: 90%;
+    }
+    .dropbtn{
+        width: 70vw;
+        padding-left: 0;
+
+    }
+    /*arrow*/
+    .fa-chevron-down {
+        /*margin-left: 13rem;*/
+        margin-left: 60%;
+    }
 }
