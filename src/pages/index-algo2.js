@@ -315,8 +315,46 @@ export default class index {
      */
     showDropdown(buttonId, dropdownId) {
         let filterButton = document.querySelector(buttonId);
+        //let arrowId=dropdownId+'id';
+
         filterButton.addEventListener('click', () => {
-            document.getElementById(dropdownId).classList.toggle('show');
+            /*this.showDropdown('#ingredient', 'ingredientDropdown');
+      this.showDropdown('#Appareils', 'appliancesDropdown');
+      this.showDropdown('#ustensils', 'ustensilsDropdown');*/
+            switch (dropdownId) {
+                case 'ingredientDropdown':
+                    if (document.getElementById('appliancesDropdown').classList.contains('show')) 
+                    { document.getElementById('appliancesDropdown').classList.replace('show', 'hide'); }
+                    if (document.getElementById('ustensilsDropdown').classList.contains('show'))
+                     { document.getElementById('ustensilsDropdown').classList.replace('show', 'hide'); }
+
+                    break;
+                case 'appliancesDropdown':
+                    if (document.getElementById('ingredientDropdown').classList.contains('show'))
+                     { document.getElementById('ingredientDropdown').classList.replace('show', 'hide'); }
+                    if (document.getElementById('ustensilsDropdown').classList.contains('show'))
+                     { document.getElementById('ustensilsDropdown').classList.replace('show', 'hide'); }
+
+                    break;
+                default:
+                    if (document.getElementById('ingredientDropdown').classList.contains('show')) 
+                    { document.getElementById('ingredientDropdown').classList.replace('show', 'hide');}
+                    if (document.getElementById('appliancesDropdown').classList.contains('show'))
+                     { document.getElementById('appliancesDropdown').classList.replace('show', 'hide'); }
+
+            }
+            if (document.getElementById(dropdownId).classList.contains('hide')) {
+                document.getElementById(dropdownId).classList.replace('hide', 'show');
+                console.log('hide');
+            }
+            else {
+                //document.getElementById(dropdownId).classList.replace('hide', 'show');
+                document.getElementById(dropdownId).classList.toggle('show');
+                console.log('show');
+            }
+            //l'elemnt devient prioritaire
+            document.getElementById(dropdownId).classList.add('prior');
+
 
         });
 
@@ -450,7 +488,12 @@ export default class index {
         document.getElementById(tagId).remove();
          //mise a jour de la liste des recettes apres suppression de tous les tags
          let keyWords = document.getElementById('search-input').value;
-         this.searchResult=this.searchBasic(keyWords, recipes);
+         if(keyWords.length>=3){
+            this.searchResult=this.searchBasic(keyWords, recipes);
+         }else{
+            this.searchResult=recipes;
+         }
+        
         //mise a jour du tableau de recettes en fonction des tags restants apres suppression
         this.selectedTags.ingredients.forEach(tagIngredient => {
             this.searchResult = this.searchByIngredients(this.searchResult, tagIngredient);
