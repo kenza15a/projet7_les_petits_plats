@@ -113,7 +113,7 @@ export default class index {
         let IngredientsDropdown = document.querySelector('#ingredientDropdown');
         //pour verifier ql type de tag est cliqué 
         let tagType = 'ingredients';
-        let ingredientsListDiv=document.createElement('div');
+        let ingredientsListDiv = document.createElement('div');
         ingredientsListDiv.setAttribute('id', 'ingredientDropdown-list');
         IngredientsDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Ingredients_search">';
         IngredientsDropdown.appendChild(ingredientsListDiv);
@@ -141,7 +141,7 @@ export default class index {
         //pour verifier ql type de tag est cliqué 
         let tagType = 'Appareils';
         let appliancesDropdown = document.querySelector('#appliancesDropdown');
-        let applianceListDiv=document.createElement('div');
+        let applianceListDiv = document.createElement('div');
         applianceListDiv.setAttribute('id', 'applianceDropdown-list');
         appliancesDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Appareils_options">';
         appliancesDropdown.appendChild(applianceListDiv);
@@ -164,7 +164,7 @@ export default class index {
     generateFilterUstensilles(ustensillesList) {//, keywordField) {
         let tagType = 'ustensis';
         let ustensillesDropdown = document.querySelector('#ustensilsDropdown');
-        let ustensillesListDiv=document.createElement('div');
+        let ustensillesListDiv = document.createElement('div');
         ustensillesListDiv.setAttribute('id', 'ustensillesDropdown-list');
         ustensillesDropdown.innerHTML = ' <input type="search" placeholder="Rechercher.." id="Ustensils_options">';
         ustensillesDropdown.appendChild(ustensillesListDiv);
@@ -387,7 +387,9 @@ export default class index {
         }
 
         document.getElementById(tagId).remove();
-        this.searchResult = this.recipeInstance.recipes;
+        //mise a jour de la liste des recettes apres suppression de tous les tags
+        let keyWords = document.getElementById('search-input').value;
+        this.searchResult=this.getResults(keyWords, this.recipeInstance.recipes);
         /*mise a jour des listes dropdown selon le tag supprimé*/
         for (let i = 0; i < this.selectedTags.ingredients.length; i++) {
             this.searchResult = this.recipeInstance.searchByIngredients(this.searchResult, this.selectedTags.ingredients[i]);
@@ -413,16 +415,20 @@ export default class index {
      * @param {String} buttonId 
      * @param {String} dropdownId 
      */
-    showDropdown(buttonId, dropdownId) {
-        let filterButton = document.querySelector(buttonId);
-        // let arrow=document.querySelector("#arrow");
-        filterButton.addEventListener('click', () => {
-            document.getElementById(dropdownId).classList.toggle('show');
-            document.getElementById(dropdownId).classList.toggle('prior');
-        });
-    }
-
-
+      showDropdown(buttonId, dropdownId) {
+          let filterButton = document.querySelector(buttonId);
+          //let arrowId=dropdownId+'id';
+         
+          filterButton.addEventListener('click', () => {
+              document.getElementById(dropdownId).classList.toggle('show');
+              //l'elemnt devient prioritaire
+              document.getElementById(dropdownId).classList.add('prior');
+    
+            
+          });
+         
+      }
+  
     //pour faire une recherche sur tags---------------->not working
     /**
      * 
@@ -496,7 +502,8 @@ export default class index {
         this.showDropdown('#ingredient', 'ingredientDropdown');
         this.showDropdown('#Appareils', 'appliancesDropdown');
         this.showDropdown('#ustensils', 'ustensilsDropdown');
-
+       
+    
     }
 }
 
